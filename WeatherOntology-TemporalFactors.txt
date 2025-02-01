@@ -1,0 +1,3 @@
+TemporalFactors Timeframe Season
+Timeframe Day Night
+Season Spring Summer Fall Winter

@@ -1,0 +1,7 @@
+WeatherConditions Visibility Wind Temperature Precipitation
+Precipitation Rain Snow
+Rain NoRain LightRain ModerateRain HeavyRain
+Snow NoSnow LightSnow ModerateSnow HeavySnow IntenseSnow
+Temperature SeverelyHot VeryHot Hot Warm Mild Cool Cold VeryCold SeverelyCold ExcessivelyCold
+Visibility ExtremelyBadVisibility BadVisibility ModerateVisibility GoodVisibility
+Wind Hurricane ViolentStorm Storm StrongGale Gale ModerateGale StrongBreeze FreshBreeze ModerateBreeze GentleBreeze LightBreeze LightAir Calm
