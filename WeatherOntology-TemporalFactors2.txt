@@ -1,0 +1,8 @@
+All Timeframe
+All Season
+Timeframe Day
+Timefram Night
+Season Spring
+Season Summer
+Season Fall
+Season Winter
