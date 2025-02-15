@@ -20,7 +20,7 @@ ontologyAtmospheric = nx.read_adjlist(path_ontoAtmospheric, create_using=nx.DiGr
 ontos = [ontologyWeather, ontologyAtmospheric, ontologyTemporal]
 
 # Chargement des données de météo
-filename = 'data/MergeLines.csv'
+filename = 'data/MergeLinesComp.csv' #ou MergeLines.csv
 dataset = pd.read_csv(filename)
 
 # Suppression des colonnes inutiles
@@ -108,4 +108,4 @@ if __name__ == '__main__':
         df = pd.DataFrame(matrix, index=date_keys, columns=date_keys)
 
         # Fichier CSV de sortie
-        df.to_csv("data/dis_matrix_ced_multidim.csv")
+        df.to_csv("data/dis_matrix_ced_multidim2014_2024.csv") # ou dis_matrix_ced_multidim2024.csv
