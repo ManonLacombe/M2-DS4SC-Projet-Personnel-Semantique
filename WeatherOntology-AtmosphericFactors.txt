@@ -1,9 +1,0 @@
-All CloudCover Pressure Condensation SolarPhenomenon
-SolarPhenomenon Radiation UVIndex
-Condensation DewPoint Humidity
-CloudCover Clear FewClouds ScatteredClouds BrokenClouds Overcast
-Pressure HighPressure NormalPressure LowPressure
-Radiation HighRadiation ModerateRadiation LowRadiation
-Humidity HighHumidity NormalHumidity LowHumidity
-DewPoint VeryConfortableDew ConfortableDew WetDew UnconfortableDew VeryUncortableDew ExtremelyUncorfortableDew
-UVIndex LowUVI ModerateUVI HighUVI VeryHighUVI ExtremeUVI
