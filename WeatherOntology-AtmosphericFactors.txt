@@ -1,4 +1,4 @@
-AtmosphericFactors CloudCover Pressure Condensation SolarPhenomenon
+All CloudCover Pressure Condensation SolarPhenomenon
 SolarPhenomenon Radiation UVIndex
 Condensation DewPoint Humidity
 CloudCover Clear FewClouds ScatteredClouds BrokenClouds Overcast

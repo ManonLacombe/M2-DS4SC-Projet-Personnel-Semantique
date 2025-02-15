@@ -1,4 +1,4 @@
-WeatherConditions Visibility Wind Temperature Precipitation
+All Visibility Wind Temperature Precipitation
 Precipitation Rain Snow
 Rain NoRain LightRain ModerateRain HeavyRain
 Snow NoSnow LightSnow ModerateSnow HeavySnow IntenseSnow
