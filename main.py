@@ -84,18 +84,15 @@ if __name__ == '__main__':
     mp.set_start_method('spawn', force=True)
 
     date_keys = sorted(s_dict.keys())
-    
-    A, B = None, None  # indices de séquences à comparer ou None pour comparer toutes les séquences du dataset
-    if A is not None and B is not None :
-        if A <= len(np_seqs) and B <= len(np_seqs):
-            distance_between_two_sequences(A, B)
-        else : 
-            print(f"Attention, indice(s) supérieur(s) au nombre de séquences présent")
-    else:
-        # Calcul complet de la matrice de distance CED multidimensionnel
+
+    #Choix du mode
+    mode = input("Choisissez le mode :\n1 - Matrice complète\n2 - Comparaison entre A et B\n3 - Comparaison même jour mais pas même année\nVotre choix : ")
+
+    if mode == "1":
+        # Mode 1 : Calcul complet de la matrice de distance CED multidimensionnel
         print("Computing distance matrix - MULTIDIMENSIONAL CED")
         pool = mp.Pool(mp.cpu_count())
-        result = pool.starmap(ced_sm, [(np_seqs[i], np_seqs[j], sim, sim, gaussian, 0.) for i in range(len(np_seqs)) for j in range(i + 1, len(np_seqs))])
+        result = pool.starmap(ced_sm, [(np_seqs[i], np_seqs[j], sim, sim, gaussian) for i in range(len(np_seqs)) for j in range(i + 1, len(np_seqs))])
         pool.close()
         pool.join()
 
@@ -108,4 +105,46 @@ if __name__ == '__main__':
         df = pd.DataFrame(matrix, index=date_keys, columns=date_keys)
 
         # Fichier CSV de sortie
-        df.to_csv("data/dis_matrix_ced_multidim2014_2024.csv") # ou dis_matrix_ced_multidim2024.csv
+        df.to_csv("data/dis_matrix_ced_multidim.csv") 
+        print("Matrice enregistrée dans data/dis_matrix_ced_multidim.csv")
+
+    elif mode == "2":
+        # Mode 2 : Comparaison entre A et B
+        print("Comparaison entre 2 séquences")
+        A = int(input("Entrez l'indice de la séquence A : "))
+        B = int(input("Entrez l'indice de la séquence B : "))
+
+        if A < len(np_seqs) and B < len(np_seqs):
+            distance_between_two_sequences(A, B)
+        else:
+            print(f"Attention, indice(s) supérieur(s) au nombre de séquences disponibles.")
+
+
+    elif mode == "3":
+        # Mode 3 : Comparaison même jour mais pas même année
+        print("Comparaison des séquences ayant la même date mais pas la même année")
+
+        # dictionnaire pour regrouper par jour/mois
+        date_groups = defaultdict(list)
+        for key in s_dict.keys():
+            day_month = key[5:]  # Extraction mois et jour
+            date_groups[day_month].append(key)
+
+        # Comparaison des séquences pour les dates ayant des années différentes
+        results = []
+        for day_month, full_dates in date_groups.items():
+            if len(full_dates) > 1: 
+                for i in range(len(full_dates)):
+                    for j in range(i + 1, len(full_dates)):
+                        A = date_keys.index(full_dates[i])
+                        B = date_keys.index(full_dates[j])
+                        dist = np.round(distance_between_two_sequences(A, B), 3)
+                        results.append((full_dates[i], full_dates[j], dist))
+
+        # Stockage résultats
+        df_results = pd.DataFrame(results, columns=["Date1", "Date2", "Distance"])
+        df_results.to_csv("data/comparison_same_day_not_year.csv", index=False)
+        print("Comparaison terminée. Résultats enregistrés dans 'data/comparison_same_day_not_year.csv'.")
+
+    else:
+        print("Mode invalide. Veuillez choisir 1, 2 ou 3.")
